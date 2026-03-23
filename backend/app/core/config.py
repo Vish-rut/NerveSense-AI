@@ -1,5 +1,6 @@
 """Application configuration using pydantic-settings."""
 
+import os
 from urllib.parse import quote_plus
 from pydantic_settings import BaseSettings
 
@@ -28,7 +29,8 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     INTERVIEW_TOKEN_EXPIRE_DAYS: int = 30
 
-    # CORS — add your Vercel domain here after deployment
+    # CORS — set via env var as comma-separated string, e.g.:
+    # CORS_ORIGINS=https://your-app.vercel.app,http://localhost:5173
     CORS_ORIGINS: list[str] = [
         "http://localhost:5173",
         "http://localhost:3000",
@@ -51,6 +53,15 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         extra = "ignore"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # Parse CORS_ORIGINS from env if it's a comma-separated string
+        cors_env = os.environ.get("CORS_ORIGINS", "")
+        if cors_env:
+            parsed = [o.strip() for o in cors_env.split(",") if o.strip()]
+            if parsed:
+                object.__setattr__(self, "CORS_ORIGINS", parsed)
 
 
 settings = Settings()
