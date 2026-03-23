@@ -4,6 +4,7 @@ NerveSenseAI — FastAPI Application Entry Point.
 Registers all routers, configures CORS, and initializes the database.
 """
 
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,9 +24,23 @@ async def lifespan(app: FastAPI):
     # Startup: create database tables
     await init_db()
     print("✅ Database tables created")
+    print(f"✅ CORS origins: {ALLOWED_ORIGINS}")
     yield
     # Shutdown: cleanup if needed
     print("👋 NerveSenseAI shutting down")
+
+
+# ── Build CORS origins directly (bypasses pydantic parsing issues) ────────────
+ALLOWED_ORIGINS = [
+    "https://nerve-sense-ai.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173",
+]
+# Allow adding extra origins from env (comma-separated)
+_extra = os.environ.get("EXTRA_CORS_ORIGINS", "")
+if _extra:
+    ALLOWED_ORIGINS.extend([o.strip() for o in _extra.split(",") if o.strip()])
 
 
 app = FastAPI(
@@ -38,7 +53,7 @@ app = FastAPI(
 # ── CORS ──────────────────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.all_cors_origins,
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
