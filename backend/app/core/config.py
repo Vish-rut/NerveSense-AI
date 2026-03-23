@@ -29,9 +29,9 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     INTERVIEW_TOKEN_EXPIRE_DAYS: int = 30
 
-    # CORS — set via env var as comma-separated string, e.g.:
-    # CORS_ORIGINS=https://your-app.vercel.app,http://localhost:5173
+    # CORS — hardcoded production + local origins
     CORS_ORIGINS: list[str] = [
+        "https://nerve-sense-ai.vercel.app",
         "http://localhost:5173",
         "http://localhost:3000",
         "http://127.0.0.1:5173",
@@ -50,18 +50,18 @@ class Settings(BaseSettings):
             )
         return "sqlite+aiosqlite:///./nervesense.db"
 
+    @property
+    def all_cors_origins(self) -> list[str]:
+        """Merge hardcoded defaults with any extra origins from env."""
+        origins = list(self.CORS_ORIGINS)
+        extra = os.environ.get("EXTRA_CORS_ORIGINS", "")
+        if extra:
+            origins.extend([o.strip() for o in extra.split(",") if o.strip()])
+        return origins
+
     class Config:
         env_file = ".env"
         extra = "ignore"
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        # Parse CORS_ORIGINS from env if it's a comma-separated string
-        cors_env = os.environ.get("CORS_ORIGINS", "")
-        if cors_env:
-            parsed = [o.strip() for o in cors_env.split(",") if o.strip()]
-            if parsed:
-                object.__setattr__(self, "CORS_ORIGINS", parsed)
 
 
 settings = Settings()
