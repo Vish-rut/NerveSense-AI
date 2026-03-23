@@ -1,0 +1,19 @@
+<svg width="220" height="36" viewBox="0 0 220 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logo-gradient" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C4B5FD"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <!-- Pill icon: exact same as sidebar LogoIcon, scaled to 36px height -->
+  <!-- viewBox 0 0 100 60 scaled to fit 56x36 -->
+  <svg x="0" y="0" width="56" height="36" viewBox="0 0 100 60">
+    <rect x="5" y="5" width="90" height="50" rx="25" stroke="url(#logo-gradient)" stroke-width="10"/>
+    <circle cx="35" cy="30" r="7" fill="url(#logo-gradient)"/>
+    <circle cx="65" cy="30" r="7" fill="url(#logo-gradient)"/>
+  </svg>
+  <!-- Text: NerveSense (purple) + AI (white) -->
+  <text x="64" y="26" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="-0.3">
+    <tspan fill="#7C3AED">NerveSense</tspan><tspan fill="#FFFFFF">AI</tspan>
+  </text>
+</svg>

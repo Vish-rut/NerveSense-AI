@@ -1,0 +1,21 @@
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+sqlalchemy>=2.0.35
+pydantic>=2.9.0
+pydantic-settings>=2.5.0
+python-multipart>=0.0.9
+asyncpg>=0.30.0
+aiosqlite>=0.20.0
+python-dotenv>=1.0.0
+greenlet>=3.0.0
+# Phase 7B: Auth
+passlib[bcrypt]>=1.7.4
+python-jose[cryptography]>=3.3.0
+# Phase 5: ML & Media Processing
+faster-whisper>=1.0.0
+mediapipe>=0.10.0
+ffmpeg-python>=0.2.0
+numpy>=1.26.0
+# Phase 6: Report Generation
+weasyprint>=62.0
+jinja2>=3.1.0

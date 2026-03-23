@@ -1,0 +1,341 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+
+  /* Core Backgrounds - Deep Dark Purple/Navy */
+  --background: #080816;
+  --foreground: #ffffff;
+
+  /* Cards and Surfaces - Slightly lighter than bg with a touch of blue/purple */
+  --card: #0D0E23;
+  --card-foreground: #ffffff;
+  --popover: #0D0E23;
+  --popover-foreground: #ffffff;
+
+  /* Primary - Vibrant Purple/Blue Gradient Accent */
+  --primary: #8B5CF6;
+  /* Violet 500 */
+  --primary-foreground: #ffffff;
+
+  /* Secondary & Muted */
+  --secondary: #1E1B4B;
+  /* Indigo 950 */
+  --secondary-foreground: #ffffff;
+  --muted: #1e1e2d;
+  --muted-foreground: #9ca3af;
+  /* Gray 400 */
+
+  /* Accents */
+  --accent: #2e2e48;
+  --accent-foreground: #ffffff;
+
+  /* Destructive */
+  --destructive: #ef4444;
+  /* Red 500 */
+  --destructive-foreground: #ffffff;
+
+  /* Borders and Inputs */
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.05);
+  --input-background: rgba(255, 255, 255, 0.05);
+  --switch-background: #374151;
+  /* Gray 700 */
+
+  /* Rings and Outlines */
+  --ring: rgba(139, 92, 246, 0.5);
+  /* Primary with opacity */
+
+  /* Charts - Vibrant Colors for dark mode */
+  --chart-1: #8b5cf6;
+  /* Violet */
+  --chart-2: #3b82f6;
+  /* Blue */
+  --chart-3: #10b981;
+  /* Emerald */
+  --chart-4: #f59e0b;
+  /* Amber */
+  --chart-5: #ec4899;
+  /* Pink */
+
+  /* Layout constraints */
+  --radius: 0.75rem;
+  /* Slightly rounder for modern feel */
+
+  /* Sidebar - Glassmorphism feel */
+  --sidebar: rgba(13, 14, 35, 0.8);
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #8b5cf6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(255, 255, 255, 0.05);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: rgba(139, 92, 246, 0.5);
+
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+}
+
+/* Landing Page Inspired Premium Card Design */
+.card-gradient {
+  position: relative;
+  background: #15152A;
+  border: none;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+  /* overflow: hidden; -- Removed to allow SendPopover to bleed out */
+}
+
+.card-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg,
+      rgba(229, 156, 255, 0.3) 0%,
+      rgba(186, 156, 255, 0.2) 50%,
+      rgba(156, 178, 255, 0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.card-gradient:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(139, 92, 246, 0.2),
+    0 0 80px rgba(139, 92, 246, 0.08),
+    0 4px 20px rgba(0, 0, 0, 0.3);
+  background: radial-gradient(ellipse at 50% 0%,
+      rgba(139, 92, 246, 0.18) 0%,
+      rgba(112, 30, 252, 0.06) 40%,
+      #15152A 80%);
+}
+
+.card-gradient:hover::before {
+  background: linear-gradient(135deg,
+      rgba(229, 156, 255, 0.7) 0%,
+      rgba(186, 156, 255, 0.5) 50%,
+      rgba(156, 178, 255, 0.7) 100%);
+}
+
+/* AI Tool Exact Key Feature Icon Badge Match */
+.ai-feature-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.ai-feature-badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 1px;
+  /* border thickness */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.ai-feature-badge:hover {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+.ai-feature-icon {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  color: #f8fafc;
+  /* Very light slate, almost metallic */
+}
+
+/* Logo Brain Icon Gradient Match */
+.logo-icon-gradient {
+  stroke: url(#logo-gradient) !important;
+  color: transparent;
+}
+
+/* Premium Button Design from User Provided Code */
+
+@utility icon-badge-squircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 92, 246, 0.1);
+  /* Light primary/purple tint */
+  border-radius: 12px;
+  padding: 8px;
+  color: var(--primary);
+  transition: all 0.3s ease;
+  width: fit-content;
+  height: fit-content;
+}
+
+@utility cursor-pointer {
+  cursor: pointer;
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+
+  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+  }
+}
+
+@utility pricing-border-glue {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
+  }
+}
+
+.btn-premium {
+  @apply relative flex items-center justify-center gap-1.5 font-medium text-white p-3 rounded-lg transition-all duration-300 bg-pricing-button pricing-border-glue before:bg-pricing-border;
+  background-color: transparent !important;
+  /* The gradient background-image handles the look */
+}
+
+.btn-premium:hover {
+  @apply before:bg-pricing-border-hover shadow-button-inner;
+  transform: translateY(-1px);
+}
+
+.btn-premium:active {
+  transform: translateY(0);
+}
+
+@utility btn-hero {
+  @apply inline-flex items-center justify-center gap-2 font-medium text-white px-7 py-3 rounded-lg transition-all duration-300 bg-hero-btn shadow-inner-hero hover:opacity-80;
+}
+
+@theme inline {
+  --background-image-pricing-button: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  --background-image-pricing-border: linear-gradient(90deg, #e59cff 0.01%, #ba9cff 50.01%, #9cb2ff 100%);
+  --background-image-pricing-border-hover: linear-gradient(251.09deg, #701efc 5.04%, #cbb3f3 96.95%);
+  --shadow-button-inner: inset 0px -6px 15px rgba(156, 178, 255, 0.25), inset 0px 6px 15px rgba(229, 156, 255, 0.25);
+  --background-image-hero-btn: linear-gradient(180deg, #a073ee -11.11%, #6e25ed 100%);
+  --shadow-inner-hero: inset 0px -3px 10px 0px rgba(0, 0, 0, 0.25);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Adding a subtle gradient background globally */
+    background: radial-gradient(circle at top, #1E1B4B 0%, #080816 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button, a {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}

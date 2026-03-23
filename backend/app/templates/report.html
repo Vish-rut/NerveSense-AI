@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NerveSenseAI Interview Report</title>
+  <style>
+    /* ============ Base Reset & Typography ============ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      color: #1a1a2e;
+      background: #ffffff;
+      font-size: 11pt;
+      line-height: 1.5;
+    }
+
+    /* ============ Page Layout (A4) ============ */
+    @page {
+      size: A4;
+      margin: 15mm 16mm;
+    }
+
+    /* ============ Header ============ */
+    .report-header {
+      text-align: center;
+      padding-bottom: 14px;
+      border-bottom: 3px solid #6c5ce7;
+      margin-bottom: 16px;
+    }
+
+    .report-header h1 {
+      font-size: 20pt;
+      color: #6c5ce7;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .report-header .subtitle {
+      font-size: 9pt;
+      color: #636e72;
+    }
+
+    /* ============ Section Headers ============ */
+    .section-title {
+      font-size: 13pt;
+      color: #2d3436;
+      font-weight: 700;
+      border-bottom: 2px solid #6c5ce7;
+      padding-bottom: 4px;
+      margin: 16px 0 10px 0;
+    }
+
+    /* ============ Info Grid ============ */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 8px;
+      margin-bottom: 14px;
+    }
+
+    .info-item {
+      font-size: 9.5pt;
+    }
+
+    .info-label {
+      color: #636e72;
+      font-weight: 600;
+    }
+
+    /* ============ Score Cards ============ */
+    .scores-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .score-card {
+      text-align: center;
+      padding: 10px 6px;
+      border-radius: 8px;
+      background: #f8f9fa;
+      border: 1px solid #dfe6e9;
+    }
+
+    .score-card .value {
+      font-size: 18pt;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 1px;
+    }
+
+    .score-card .label {
+      font-size: 7.5pt;
+      color: #636e72;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .score-high { color: #00b894; }
+    .score-med { color: #fdcb6e; }
+    .score-low { color: #e17055; }
+
+    /* ============ Summary ============ */
+    .summary-box {
+      background: #f0ecfc;
+      border-left: 4px solid #6c5ce7;
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 10px 0;
+      font-size: 9.5pt;
+    }
+
+    /* ============ Question Table ============ */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0;
+      font-size: 8.5pt;
+    }
+
+    th {
+      background: #6c5ce7;
+      color: white;
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    thead {
+      display: table-header-group;
+    }
+
+    tr {
+      page-break-inside: avoid;
+    }
+
+    td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #dfe6e9;
+    }
+
+    tr:nth-child(even) { background: #f8f9fa; }
+
+    /* ============ Detailed Metrics Grid ============ */
+    .detailed-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+      align-items: stretch;
+    }
+    .metric-card {
+      background: #ffffff;
+      border: 1px solid #dfe6e9;
+      border-top: 3px solid #6c5ce7;
+      border-radius: 8px;
+      padding: 12px;
+      page-break-inside: avoid;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .metric-card h3 {
+      font-size: 10pt;
+      color: #6c5ce7;
+      margin-bottom: 10px;
+      border-bottom: none;
+      padding-bottom: 0px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3px;
+      font-size: 8pt;
+      color: #2d3436;
+      font-weight: 500;
+    }
+    .metric-bar-bg {
+      width: 100%;
+      background: #f0ecfc;
+      height: 5px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+    .metric-bar-fill {
+      background: #6c5ce7;
+      height: 100%;
+      border-radius: 3px;
+    }
+    .stat-box-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .stat-box {
+      background: #f8f9fa;
+      border: 1px solid #dfe6e9;
+      border-radius: 8px;
+      padding: 8px 6px;
+      text-align: center;
+    }
+    .stat-box .val { font-size: 14pt; font-weight: 800; color: #6c5ce7; margin-bottom: 1px; display: block; }
+    .stat-box .lbl { font-size: 7.5pt; color: #636e72; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .timeline-container { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 6px; }
+    .timeline-box { flex: 1 1 28%; text-align: center; color: white; padding: 4px 2px; border-radius: 4px; font-weight: 700; font-size: 8pt; margin-bottom: 3px; }
+    .timeline-box span { font-size: 6.5pt; font-weight: normal; opacity: 0.9; display: block; }
+    .timeline-good { background: #00b894; }
+    .timeline-med { background: #fdcb6e; }
+    .timeline-bad { background: #e17055; }
+
+    /* ============ Tips ============ */
+    .tip-card {
+      padding: 8px 12px;
+      margin: 6px 0;
+      border-radius: 8px;
+      border-left: 4px solid #636e72;
+      page-break-inside: avoid;
+    }
+
+    .tip-high { border-left-color: #e17055; background: #fff5f5; }
+    .tip-medium { border-left-color: #fdcb6e; background: #fffdf5; }
+    .tip-low { border-left-color: #00b894; background: #f0fff4; }
+
+    .tip-title {
+      font-weight: 700;
+      font-size: 9pt;
+      margin-bottom: 2px;
+    }
+
+    .tip-desc {
+      font-size: 8.5pt;
+      color: #2d3436;
+    }
+
+    .tip-severity {
+      display: inline-block;
+      font-size: 6.5pt;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 6px;
+    }
+
+    .sev-high { background: #e17055; color: white; }
+    .sev-medium { background: #fdcb6e; color: #2d3436; }
+    .sev-low { background: #00b894; color: white; }
+
+    /* ============ Footer ============ */
+    .report-footer {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #dfe6e9;
+      text-align: center;
+      font-size: 7.5pt;
+      color: #b2bec3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======= HEADER ======= -->
+  <div class="report-header">
+    <h1>NerveSenseAI</h1>
+    <div class="subtitle">AI-Powered Interview Analysis Report</div>
+  </div>
+
+  <!-- ======= CANDIDATE INFO ======= -->
+  <div class="info-grid">
+    <div class="info-item">
+      <span class="info-label">Candidate:</span> {{ report.candidate.name }}
+    </div>
+    <div class="info-item">
+      <span class="info-label">Position:</span> {{ report.interview.job_position }}
+    </div>
+    <div class="info-item">
+      <span class="info-label">Email:</span> {{ report.candidate.email or 'N/A' }}
+    </div>
+    <div class="info-item">
+      <span class="info-label">Report Generated:</span> {{ report.generated_at or 'N/A' }}
+    </div>
+  </div>
+
+  <!-- ======= OVERALL SCORES ======= -->
+  <h2 class="section-title">Overall Scores</h2>
+
+  <!-- Overall Confidence Hero -->
+  <div style="text-align: center; margin-bottom: 14px; padding: 14px 12px; background: #f0ecfc; border-radius: 10px;">
+    <div style="font-size: 8pt; color: #636e72; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Overall Confidence Score</div>
+    <div style="font-size: 28pt; font-weight: 800; color: #6c5ce7;">{{ "%.0f"|format(report.scores.overall_confidence) }}%</div>
+    <div style="font-size: 8.5pt; color: #636e72; margin-top: 2px;">{{ report.candidate.name }} — {{ report.interview.job_position }}</div>
+  </div>
+
+  {% set temp_details = report.scores.component_details or {} %}
+  <div class="scores-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="score-card">
+      <span class="value" style="color: {% if report.scores.facial >= 60 %}#6c5ce7{% else %}#fdcb6e{% endif %};">
+        {{ "%.0f"|format(report.scores.facial) }}
+      </span>
+      <span class="label">Facial (35%)</span>
+      <div style="font-size: 7pt; color: #636e72; margin-top: 2px;">Nervousness: {{ "%.0f"|format(temp_details.get('facial_nervousness') or (100 - (report.scores.facial or 50))) }}%</div>
+    </div>
+    <div class="score-card">
+      <span class="value" style="color: {% if report.scores.vocal >= 60 %}#a855f7{% else %}#fdcb6e{% endif %};">
+        {{ "%.0f"|format(report.scores.vocal) }}
+      </span>
+      <span class="label">Vocal (30%)</span>
+      <div style="font-size: 7pt; color: #636e72; margin-top: 2px;">Nervousness: {{ "%.0f"|format(temp_details.get('vocal_nervousness') or (100 - (report.scores.vocal or 50))) }}%</div>
+    </div>
+    <div class="score-card">
+      <span class="value" style="color: {% if report.scores.behavioral >= 60 %}#00b894{% else %}#fdcb6e{% endif %};">
+        {{ "%.0f"|format(report.scores.behavioral) }}
+      </span>
+      <span class="label">Behavioral (35%)</span>
+      <div style="font-size: 7pt; color: #636e72; margin-top: 2px;">Nervousness: {{ "%.0f"|format(temp_details.get('behavioral_nervousness') or (100 - (report.scores.behavioral or 50))) }}%</div>
+    </div>
+    <div class="score-card">
+      <span class="value" style="color: {% if report.scores.overall_nervousness <= 35 %}#22D3EE{% elif report.scores.overall_nervousness <= 60 %}#fdcb6e{% else %}#e17055{% endif %};">
+        {{ "%.0f"|format(report.scores.overall_nervousness) }}
+      </span>
+      <span class="label">Nervousness</span>
+      <div style="font-size: 7pt; color: #636e72; margin-top: 2px;">{% if report.scores.overall_nervousness <= 35 %}Low{% elif report.scores.overall_nervousness <= 60 %}Moderate{% else %}Elevated{% endif %}</div>
+    </div>
+  </div>
+
+  <!-- ======= SUMMARY ======= -->
+  <div class="summary-box">
+    {{ report.summary }}
+  </div>
+
+  <!-- ======= DETAILED METRICS ======= -->
+  <h2 class="section-title">Detailed Metrics</h2>
+  
+  {% set ns = namespace(wpm_sum=0, wpm_count=0, fillers=0, fidgets=0, posture=0, touch=0) %}
+  {% for q in report.questions %}
+    {% if q.analysis %}
+      {% set ns.wpm_sum = ns.wpm_sum + (q.analysis.speaking_rate or 0) %}
+      {% if q.analysis.speaking_rate and q.analysis.speaking_rate > 0 %}
+        {% set ns.wpm_count = ns.wpm_count + 1 %}
+      {% endif %}
+      {% set ns.fillers = ns.fillers + (q.analysis.filler_word_count or 0) %}
+      {% set ns.fidgets = ns.fidgets + (q.analysis.fidget_count or 0) %}
+      {% set ns.posture = ns.posture + (q.analysis.posture_shift_count or 0) %}
+      {% set ns.touch = ns.touch + (q.analysis.self_touch_count or 0) %}
+    {% endif %}
+  {% endfor %}
+  {% set avg_wpm = (ns.wpm_sum / ns.wpm_count)|round|int if ns.wpm_count > 0 else 0 %}
+
+  {% set details = report.scores.component_details or {} %}
+  {% set eye_contact = (details.get('eye_contact_score') if details.get('eye_contact_score') is not none else (report.scores.facial * 0.8))|round|int %}
+  {% set gaze_stab = (details.get('gaze_stability_score') if details.get('gaze_stability_score') is not none else 50)|round|int %}
+  {% set head_stab = (details.get('head_stability_score') if details.get('head_stability_score') is not none else 50)|round|int %}
+  {% set smile = (details.get('smile_score') if details.get('smile_score') is not none else (report.scores.facial * 0.6))|round|int %}
+  {% set brow_relax = (100 - (details.get('brow_tension') if details.get('brow_tension') is not none else 0))|round|int %}
+  {% set jaw_relax = (100 - (details.get('jaw_tension') if details.get('jaw_tension') is not none else 0))|round|int %}
+
+  {% set facial_nerv = (details.get('facial_nervousness') if details.get('facial_nervousness') is not none else (100 - (report.scores.facial or 50)))|round|int %}
+  {% set vocal_nerv = (details.get('vocal_nervousness') if details.get('vocal_nervousness') is not none else (100 - (report.scores.vocal or 50)))|round|int %}
+  {% set behavioral_nerv = (details.get('behavioral_nervousness') if details.get('behavioral_nervousness') is not none else (100 - (report.scores.behavioral or 50)))|round|int %}
+
+  <div class="detailed-metrics-grid" style="page-break-inside: auto;">
+    <!-- Facial Metrics -->
+    <div class="metric-card">
+      <h3>Facial Metrics</h3>
+      
+      {% set facial_items = [
+        ('Eye Contact', eye_contact, '#6c5ce7'),
+        ('Gaze Stability', gaze_stab, '#6c5ce7'),
+        ('Head Stability', head_stab, '#6c5ce7'),
+        ('Smile', smile, '#6c5ce7'),
+        ('Brow Relax', brow_relax, '#6c5ce7'),
+        ('Jaw Relax', jaw_relax, '#6c5ce7')
+      ] %}
+      {% for name, val, color in facial_items %}
+      <div style="display: flex; justify-content: space-between; font-size: 8pt; margin-bottom: 2px; color: #636e72;">
+        <span>{{ name }}</span><span style="color: #2d3436; font-weight: 600;">{{ val }}%</span>
+      </div>
+      <div style="width: 100%; background: #eef0f2; height: 5px; border-radius: 3px; margin-bottom: 6px;">
+        <div style="width: {{ val }}%; height: 100%; border-radius: 3px; background: {{ color }};"></div>
+      </div>
+      {% endfor %}
+
+      <!-- Emotion Distribution (compact legend only) -->
+      <div style="margin-top: 8px; border-top: 1px dashed #dfe6e9; padding-top: 6px;">
+        <div style="font-size: 8.5pt; font-weight: 700; color: #6c5ce7; margin-bottom: 4px;">Emotion Distribution</div>
+        {% set em = report.emotion_distribution %}
+        {% if em %}
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3px; font-size: 7.5pt;">
+          <div style="display: flex; align-items: center; gap: 3px;"><div style="width: 7px; height: 7px; border-radius: 50%; background: #94A3B8; flex-shrink: 0;"></div><span style="color: #636e72;">Neutral: {{ em.neutral }}%</span></div>
+          <div style="display: flex; align-items: center; gap: 3px;"><div style="width: 7px; height: 7px; border-radius: 50%; background: #22D3EE; flex-shrink: 0;"></div><span style="color: #636e72;">Focus: {{ em.focus }}%</span></div>
+          <div style="display: flex; align-items: center; gap: 3px;"><div style="width: 7px; height: 7px; border-radius: 50%; background: #F59E0B; flex-shrink: 0;"></div><span style="color: #636e72;">Stress: {{ em.stress }}%</span></div>
+          <div style="display: flex; align-items: center; gap: 3px;"><div style="width: 7px; height: 7px; border-radius: 50%; background: #8B5CF6; flex-shrink: 0;"></div><span style="color: #636e72;">Confidence: {{ em.confidence }}%</span></div>
+        </div>
+        {% else %}
+        <div style="font-size: 7.5pt; color: #b2bec3;">No emotion data available.</div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- Vocal Metrics -->
+    <div class="metric-card" style="border-top: 3px solid #a855f7;">
+      <h3 style="color: #a855f7;">Vocal Metrics</h3>
+      {% if avg_wpm == 0 and ns.fillers == 0 %}
+      <div style="text-align: center; color: #636e72; padding: 16px 8px; font-size: 8.5pt; background: #f8f9fa; border-radius: 8px; border: 1px dashed #dfe6e9;">
+        No vocal data was captured for this session.<br><br>Ensure microphone access is enabled during the interview.
+      </div>
+      {% else %}
+      <!-- Stat Boxes -->
+      <div class="stat-box-grid">
+        <div class="stat-box">
+          <span class="val" style="color: #a855f7;">{{ avg_wpm }}</span>
+          <span class="lbl">Avg WPM</span>
+        </div>
+        <div class="stat-box">
+          <span class="val" style="color: #fbbf24;">{{ ns.fillers }}</span>
+          <span class="lbl">Filler Words</span>
+        </div>
+      </div>
+
+      <!-- Speaking Pace per Question -->
+      <div style="margin-top: 8px; border-top: 1px dashed #dfe6e9; padding-top: 6px;">
+        <div style="font-size: 8pt; font-weight: 700; color: #636e72; margin-bottom: 6px;">Speaking Pace (WPM) by Question</div>
+        {% set max_wpm = namespace(val=1) %}
+        {% for q in report.questions %}
+          {% if q.analysis and (q.analysis.speaking_rate or 0) > max_wpm.val %}
+            {% set max_wpm.val = q.analysis.speaking_rate %}
+          {% endif %}
+        {% endfor %}
+        {% for q in report.questions %}
+          {% if q.analysis %}
+          {% set wpm_val = (q.analysis.speaking_rate or 0)|round|int %}
+          <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 3px; font-size: 7.5pt;">
+            <span style="width: 18px; color: #636e72; flex-shrink: 0;">Q{{ loop.index }}</span>
+            <div style="flex: 1; background: #eef0f2; height: 10px; border-radius: 3px; overflow: hidden;">
+              <div style="width: {{ (wpm_val / max_wpm.val * 100)|round|int if max_wpm.val > 0 else 0 }}%; height: 100%; background: #a855f7; border-radius: 3px;"></div>
+            </div>
+            <span style="width: 24px; text-align: right; color: #2d3436; font-weight: 600;">{{ wpm_val }}</span>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <!-- Filler Word Frequency -->
+      <div style="margin-top: 8px; border-top: 1px dashed #dfe6e9; padding-top: 6px;">
+        <div style="font-size: 8pt; font-weight: 700; color: #636e72; margin-bottom: 6px;">Filler Word Frequency</div>
+        {% set max_filler = namespace(val=1) %}
+        {% for q in report.questions %}
+          {% if q.analysis and (q.analysis.filler_word_count or 0) > max_filler.val %}
+            {% set max_filler.val = q.analysis.filler_word_count %}
+          {% endif %}
+        {% endfor %}
+        {% for q in report.questions %}
+          {% if q.analysis %}
+          {% set filler_val = q.analysis.filler_word_count or 0 %}
+          <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 3px; font-size: 7.5pt;">
+            <span style="width: 18px; color: #636e72; flex-shrink: 0;">Q{{ loop.index }}</span>
+            <div style="flex: 1; background: #eef0f2; height: 10px; border-radius: 3px; overflow: hidden;">
+              <div style="width: {{ (filler_val / max_filler.val * 100)|round|int if max_filler.val > 0 else 0 }}%; height: 100%; background: #fbbf24; border-radius: 3px;"></div>
+            </div>
+            <span style="width: 14px; text-align: right; color: #2d3436; font-weight: 600;">{{ filler_val }}</span>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Behavioral Metrics -->
+    <div class="metric-card" style="border-top: 3px solid #10b981;">
+      <h3 style="color: #10b981;">Behavioral Metrics</h3>
+      
+      <!-- 3-column stat boxes -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-bottom: 10px;">
+        <div class="stat-box">
+          <span class="val" style="color: #f97316;">{{ ns.fidgets }}</span>
+          <span class="lbl">Fidgets</span>
+        </div>
+        <div class="stat-box">
+          <span class="val" style="color: #10b981;">{{ ns.posture }}</span>
+          <span class="lbl">Posture Shifts</span>
+        </div>
+        <div class="stat-box">
+          <span class="val" style="color: #fbbf24;">{{ ns.touch }}</span>
+          <span class="lbl">Self-Touch</span>
+        </div>
+      </div>
+
+      <!-- Behavioral Incidents per Question -->
+      <div style="margin-top: 8px; border-top: 1px dashed #dfe6e9; padding-top: 6px;">
+        <div style="font-size: 8pt; font-weight: 700; color: #636e72; margin-bottom: 6px;">Behavioral Incidents by Question</div>
+        {% set max_behav = namespace(val=1) %}
+        {% for q in report.questions %}
+          {% if q.analysis %}
+            {% set q_max = (q.analysis.fidget_count or 0) + (q.analysis.posture_shift_count or 0) + (q.analysis.self_touch_count or 0) %}
+            {% if q_max > max_behav.val %}{% set max_behav.val = q_max %}{% endif %}
+          {% endif %}
+        {% endfor %}
+        {% for q in report.questions %}
+          {% if q.analysis %}
+          {% set f_val = q.analysis.fidget_count or 0 %}
+          {% set p_val = q.analysis.posture_shift_count or 0 %}
+          {% set t_val = q.analysis.self_touch_count or 0 %}
+          {% set q_total = f_val + p_val + t_val %}
+          <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 3px; font-size: 7.5pt;">
+            <span style="width: 18px; color: #636e72; flex-shrink: 0;">Q{{ loop.index }}</span>
+            <div style="flex: 1; display: flex; height: 10px; border-radius: 3px; overflow: hidden; background: #eef0f2;">
+              {% if f_val > 0 %}<div style="width: {{ (f_val / max_behav.val * 100)|round|int }}%; background: #f97316;"></div>{% endif %}
+              {% if p_val > 0 %}<div style="width: {{ (p_val / max_behav.val * 100)|round|int }}%; background: #10b981;"></div>{% endif %}
+              {% if t_val > 0 %}<div style="width: {{ (t_val / max_behav.val * 100)|round|int }}%; background: #fbbf24;"></div>{% endif %}
+            </div>
+            <span style="width: 14px; text-align: right; color: #2d3436; font-weight: 600;">{{ q_total }}</span>
+          </div>
+          {% endif %}
+        {% endfor %}
+        <!-- Legend -->
+        <div style="display: flex; gap: 8px; margin-top: 4px; font-size: 6.5pt;">
+          <div style="display: flex; align-items: center; gap: 2px;"><div style="width: 6px; height: 6px; border-radius: 2px; background: #f97316;"></div><span style="color: #636e72;">Fidgets</span></div>
+          <div style="display: flex; align-items: center; gap: 2px;"><div style="width: 6px; height: 6px; border-radius: 2px; background: #10b981;"></div><span style="color: #636e72;">Posture</span></div>
+          <div style="display: flex; align-items: center; gap: 2px;"><div style="width: 6px; height: 6px; border-radius: 2px; background: #fbbf24;"></div><span style="color: #636e72;">Touch</span></div>
+        </div>
+      </div>
+      
+      <!-- Nervousness Timeline -->
+      <div style="margin-top: 8px; border-top: 1px dashed #dfe6e9; padding-top: 6px;">
+        <div style="font-size: 8pt; font-weight: 700; color: #636e72; margin-bottom: 6px;">Nervousness Timeline</div>
+        <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+          {% for q in report.questions %}
+            {% if q.analysis %}
+              {% set nerv = q.analysis.nervousness_score or 0 %}
+              {% set nerv_color = '#22D3EE' if nerv <= 35 else '#F59E0B' if nerv <= 60 else '#EF4444' %}
+              {% set nerv_level = 'low' if nerv <= 35 else 'moderate' if nerv <= 60 else 'elevated' %}
+              <div style="flex: 1 1 28%; text-align: center; margin-bottom: 3px;">
+                <div style="background: {{ nerv_color }}; color: white; padding: 4px 2px; border-radius: 5px; font-weight: 700; font-size: 8.5pt;">
+                  {{ "%.0f"|format(nerv) }}
+                </div>
+                <div style="font-size: 6.5pt; color: #636e72; margin-top: 1px;">Q{{ loop.index }}</div>
+                <div style="font-size: 5.5pt; color: #b2bec3;">{{ nerv_level }}</div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- ======= QUESTION ANALYSIS ======= -->
+  {% if report.questions %}
+  <h2 class="section-title">Question-by-Question Analysis</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Question</th>
+        <th>Type</th>
+        <th>Confidence</th>
+        <th>Eye Contact</th>
+        <th>WPM</th>
+        <th>Fillers</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for q in report.questions %}
+      <tr>
+        <td>{{ q.order + 1 }}</td>
+        <td>{{ q.text[:80] }}{% if q.text|length > 80 %}...{% endif %}</td>
+        <td>{{ q.type }}</td>
+        {% if q.analysis %}
+        <td>{{ "%.0f"|format(q.analysis.confidence_score or 0) }}</td>
+        <td>{{ "%.0f"|format(q.analysis.eye_contact_score or 0) }}%</td>
+        <td>{{ "%.0f"|format(q.analysis.speaking_rate or 0) }}</td>
+        <td>{{ q.analysis.filler_word_count or 0 }}</td>
+        {% else %}
+        <td colspan="4" style="color: #b2bec3;">No analysis data</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <!-- ======= IMPROVEMENT TIPS ======= -->
+  {% if report.tips %}
+  <h2 class="section-title">Improvement Tips</h2>
+  {% for tip in report.tips %}
+  <div class="tip-card tip-{{ tip.severity }}">
+    <div class="tip-title">
+      {{ tip.title }}
+      <span class="tip-severity sev-{{ tip.severity }}">{{ tip.severity }}</span>
+    </div>
+    <div class="tip-desc">{{ tip.description }}</div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <!-- ======= FOOTER ======= -->
+  <div class="report-footer">
+    Generated by NerveSenseAI | Confidential Interview Analysis Report
+  </div>
+
+</body>
+</html>

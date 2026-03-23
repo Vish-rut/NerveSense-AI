@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+backend/venv/
+backend/venv_stable/
+
+# Build output
+dist/
+
+# Environment variables
+.env
+backend/.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# SQLite (local dev only)
+backend/nervesense.db
+
+# Media uploads (local dev only)
+backend/media_uploads/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
